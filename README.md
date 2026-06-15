@@ -1,6 +1,7 @@
 # remote_jupyter
 
 Bash script to launch Jupyter Lab on a remote server via SSH, open an SSH tunnel, and open the browser — all in one command.
+Mostly built by LLM (Claude code, Sonnet 4.6).
 
 ## Requirements
 
@@ -56,6 +57,11 @@ Use `-r` / `-l` if you started with non-default ports.
 - Remote startup logs are written to `/tmp/jupyter_<PORT>.log` on the server.
 - For Jupyter Server <2 (Lab <4), change `--IdentityProvider.token=` to `--ServerApp.token=` in the script.
 - The remote shell is `zsh`. `~/.zshrc` is sourced on each SSH call to ensure PATH (e.g. pyenv/anyenv) is available.
+
+## Contributors
+
+- @ryokbys
+
 
 ## License
 
