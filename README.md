@@ -12,15 +12,13 @@ Mostly built by LLM (Claude code, Sonnet 4.6).
 ## Usage
 
 ```sh
-./remote_jupyter.sh <start|stop> [options] user@host
+./remote_jupyter.sh [options] user@host
 ```
 
-### start
-
-Starts Jupyter Lab on the remote server (if not already running), opens an SSH tunnel, and launches the browser.
+Connects to Jupyter Lab on the remote server. If it is not running, starts it first, then opens an SSH tunnel and launches the browser. If it is already running, skips the start step and connects directly.
 
 ```sh
-./remote_jupyter.sh start user@myserver
+./remote_jupyter.sh user@myserver
 ```
 
 Options:
@@ -29,16 +27,16 @@ Options:
 |---|---|---|
 | `-r PORT` | `8889` | Remote port for Jupyter Lab |
 | `-l PORT` | `8889` | Local port for the SSH tunnel |
-| `-d DIR` | remote home | Remote notebook directory |
+| `-d DIR` | remote home | Remote notebook directory (ignored if already running) |
 
 Examples:
 
 ```sh
 # Custom ports
-./remote_jupyter.sh start -r 8890 -l 8890 user@myserver
+./remote_jupyter.sh -r 8890 -l 8890 user@myserver
 
 # Start in a specific directory
-./remote_jupyter.sh start -d /home/user/projects user@myserver
+./remote_jupyter.sh -d /home/user/projects user@myserver
 ```
 
 ### stop

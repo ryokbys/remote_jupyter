@@ -7,21 +7,24 @@ MAX_WAIT=30   # seconds to poll for Jupyter startup
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") <start|stop> [options] user@host
+Usage: $(basename "$0") [options] user@host
+       $(basename "$0") stop [options] user@host
 
-Commands:
-  start   Launch Jupyter Lab on remote, open SSH tunnel, open browser
-  stop    Kill SSH tunnel and stop remote Jupyter Lab
+Without 'stop': connect to Jupyter Lab on remote (start if not running).
 
 Options:
   -r PORT   Remote port (default ${REMOTE_PORT_DEFAULT})
   -l PORT   Local port  (default ${LOCAL_PORT_DEFAULT})
-  -d DIR    Remote notebook-dir; start only (default: remote home)
+  -d DIR    Remote notebook-dir (default: remote home; ignored when already running)
 EOF
 }
 
 [ $# -lt 1 ] && { usage; exit 1; }
-CMD="$1"; shift
+CMD="start"
+if [ "$1" = "stop" ]; then
+  CMD="stop"
+  shift
+fi
 
 REMOTE_PORT=${REMOTE_PORT_DEFAULT}
 LOCAL_PORT=${LOCAL_PORT_DEFAULT}
